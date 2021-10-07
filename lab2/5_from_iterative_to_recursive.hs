@@ -15,5 +15,7 @@ bits = aux 0
         aux bits n = aux (bits + mod n 2) (div n  2)
 
 --es3
-euclid :: Int -> Int
-euclid aux 
+euclid :: Int -> Int -> Int
+euclid n m  | m == n = n
+            | m < n = euclid (n - m) m
+            | otherwise = euclid n (m - n)
