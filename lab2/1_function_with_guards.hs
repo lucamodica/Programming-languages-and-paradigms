@@ -11,7 +11,7 @@ nextAbs n | mod n 2 == 0 = n + 1
           | otherwise = assoluto n
 
 
---es2
+-- es2
 bisestile :: Int -> Bool
 bisestile n = (mod n 4 == 0 && mod n 100 /= 0) || (mod n 400 == 0)
 
@@ -20,7 +20,7 @@ giorni n | bisestile n = 366
          | otherwise = 365
 
 
---es3
+-- es3
 assoluto2 :: Int -> Int
 assoluto2 n | n >= 0 = n
             | otherwise = negate n
