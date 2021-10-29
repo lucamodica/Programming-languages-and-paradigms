@@ -28,4 +28,6 @@ filter :: (a -> Bool) -> [a] -> [a]
 filter f = foldr aux []
     where
         aux x : xs | f x = x : xs
-                   | otherwise = xs 
+                   | otherwise = xs
+
+
