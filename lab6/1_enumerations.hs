@@ -38,5 +38,26 @@ fraR :: Int -> Day -> Day
 fraR n = foldr (.) id (replicate n tomorrow)
 
 
+-- es3
+-- Ordering is an enumeration that have 3 different values:
+-- - LT (lower than)
+-- - EQ (equal)
+-- - GT (greater than).
+-- Saying that the "compare" function, with 2 parameter values,
+-- can return an Ordering value to indicates the comparison
+-- result. We use a Ordering value where a comparison operation
+-- may be expensive (for example between 2 lists).
+
+
+-- es4
+-- A case where the () type can be useful is in functions structured
+-- such in this way: () -> T.
+-- This is beacause "() -> T" will be a constant function, we already
+-- know that it will be applied to a () type.
+-- Functions such as "T -> ()" instead is useless beacause it can either
+-- never ends or return a () type.
+
+
+
 
 

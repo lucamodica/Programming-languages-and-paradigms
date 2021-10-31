@@ -27,7 +27,20 @@ map f = foldr ((:) . f) []
 filter :: (a -> Bool) -> [a] -> [a]
 filter f = foldr aux []
     where
-        aux x : xs | f x = x : xs
-                   | otherwise = xs
+        aux x  xs | f x = x : xs
+                  | otherwise = xs
 
+-- es6
+isSubList :: Eq a => [a] -> [a] -> Bool
+isSubList [] _ = True
+isSubList _ [] = False
+isSubList (x : xs) (y : ys) | x == y = isSubList xs ys
+isSubList xs (_ : ys) = isSubList xs ys
+
+-- es7
+listOfLists :: Eq a => [a] -> [[a]]
+listOfLists [] = [[]]
+listOfLists (x : xs) = xss ++ map (x :) xss
+    where
+        xss = listOfLists xs
 
