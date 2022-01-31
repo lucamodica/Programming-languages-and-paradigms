@@ -20,12 +20,12 @@ maxLengthLists xs = filter ((== maxl) . length) xs
         maxl = maximum (map length xs)
 
 -- es4
-map :: (a -> b) -> [a] -> [b]
-map f = foldr ((:) . f) []
+mapp :: (a -> b) -> [a] -> [b]
+mapp f = foldr ((:) . f) []
 
 -- es5
-filter :: (a -> Bool) -> [a] -> [a]
-filter f = foldr aux []
+filterr :: (a -> Bool) -> [a] -> [a]
+filterr f = foldr aux []
     where
         aux x  xs | f x = x : xs
                   | otherwise = xs
