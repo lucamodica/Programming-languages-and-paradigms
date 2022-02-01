@@ -6,7 +6,5 @@ lucaRec xs = aux xs 0
     aux (x : xs) v = (x, v + x) : aux xs (v + x)
 
 luca :: Integral a => [a] -> [(a, a)]
-
-luca
-
--- >>> luca [1, 2, 3]
+luca [] = []
+luca (x : xs) = scanl (\(a, b) c -> (c, b + c)) (x, x) xs
