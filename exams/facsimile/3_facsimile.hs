@@ -31,3 +31,6 @@ normalize (Node x ts) = Node x $ filter notEmpty (map normalize ts)
   where
     notEmpty Empty = False
     notEmpty _ = True
+
+wow :: [Int] -> [Int]
+wow xs = filter (> 4) (map (+ 2) xs)
