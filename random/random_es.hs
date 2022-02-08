@@ -55,13 +55,18 @@ evenPosElem :: [a] -> [a]
 evenPosElem xs = map fst (filter (even . snd) (zip xs [0 ..]))
 
 -- ## es7 ##
-split :: String -> (String, String)
-split "" = ("", "")
-split ss = aux ss ("", "")
+split' :: String -> (String, String)
+split' "" = ("", "")
+split' ss = aux ss ("", "")
   where
     aux [] (fsts, snds) = (fsts, snds)
     aux (c : cs) (fsts, _)
       | c == ',' = aux "" (fsts, cs)
       | otherwise = aux cs (fsts ++ [c], "")
 
--- >>> split "ci"
+-- ## es8 ##
+count :: String -> Int
+count xs = length $ filter (all (\ xs [x] -> x `elem` ['A' .. 'Z'])) (words xs)
+
+-- >>> count ""
+-- 0
