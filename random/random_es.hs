@@ -66,7 +66,8 @@ split' ss = aux ss ("", "")
 
 -- ## es8 ##
 count :: String -> Int
-count xs = length $ filter (all (\ xs [x] -> x `elem` ['A' .. 'Z'])) (words xs)
+count xs = length $ filter aux (words xs)
+  where
+    aux = all (\x -> x `elem` ['A' .. 'Z'])
 
--- >>> count ""
--- 0
+-- >>>
