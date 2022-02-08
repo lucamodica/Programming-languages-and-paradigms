@@ -39,4 +39,29 @@ maxt (Node x ts) = maximum (x : concatMap elements ts)
   where
     elements (Node x ts) = x : concatMap elements ts
 
--- >>> maxt (Node 3 [Node 9 []])
+-- ## es4: tree as input, a couple list containing as first an even number
+-- and as second with an odd one and so on ##
+evenOddTreeElems :: Integral a => Tree a -> [(a, a)]
+evenOddTreeElems (Node x ts) = zip (filter even (x : concatMap elements ts)) (filter odd (x : concatMap elements ts))
+  where
+    elements (Node x ts) = x : concatMap elements ts
+
+-- ## es5 ##
+invAndNull :: [Float] -> ([Float], Int)
+invAndNull xs = (filter (not . isNaN) (map (1 /) xs), length (filter isNaN xs))
+
+-- ## es6 ##
+evenPosElem :: [a] -> [a]
+evenPosElem xs = map fst (filter (even . snd) (zip xs [0 ..]))
+
+-- ## es7 ##
+split :: String -> (String, String)
+split "" = ("", "")
+split ss = aux ss ("", "")
+  where
+    aux [] (fsts, snds) = (fsts, snds)
+    aux (c : cs) (fsts, _)
+      | c == ',' = aux "" (fsts, cs)
+      | otherwise = aux cs (fsts ++ [c], "")
+
+-- >>> split "ci"
