@@ -1,8 +1,8 @@
 -- useful data structures
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-
-{-# HLINT ignore "Use even" #-}
 data Tree a = Node a [Tree a]
+
+data IntTree = Leaf Int | Nodee (Int, IntTree, IntTree)
+  deriving (Show)
 
 -- ## es1: list as input, list of couple with element and the
 -- sum of itself and the list previous elements ##
@@ -167,5 +167,58 @@ countVowelPaliC xss = sum $ map (length . filterVowels) (filter (\xs -> xs == re
   where
     filterVowels = filter (\x -> x `elem` ['a', 'e', 'i', 'o', 'u'])
 
--- >>> countVowelPaliC ["ciao", "come", "otto", "acaca"]
--- 5
+-- ## es14: given a list of strings xs computes the sum of the
+-- lengths of the strings starting with the character 'A' ##
+-- Recursive
+totalLengthR :: [String] -> Int
+totalLengthR [] = 0
+totalLengthR (xs : xss)
+  | startA xs = lengthh xs + totalLengthR xss
+  | otherwise = totalLengthR xss
+  where
+    startA [] = False
+    startA (x : xs)
+      | x == 'A' = True
+      | otherwise = False
+    lengthh [] = 0
+    lengthh (x : xs) = 1 + lengthh xs
+
+-- Prelude
+totalLengthC :: [String] -> Int
+totalLengthC xs = sum $ map length $ filter ((== 'A') . head) xs
+
+-- ## es15: given a list xs returns a new list obtained from xs
+-- by removing the elements at odd positions ##
+-- Recursive
+filterOddR :: [a] -> [a]
+filterOddR [] = []
+filterOddR [x] = []
+filterOddR (x : y : xs) = y : filterOddR xs
+
+-- Prelude
+filterOddC :: [a] -> [a]
+filterOddC xs = map snd (filter (even . fst) (zip [1 ..] xs))
+
+-- ## es16: implement tmap, a "tree version" of the map combinator.
+-- More precisely, the function tmap should take a function f and a
+-- tree t and should apply f to each value in t (use IntTree data) ##
+tmap :: (Int -> Int) -> IntTree -> IntTree
+tmap f (Leaf x) = Leaf (f x)
+tmap f (Nodee (x, tx, ty)) = Nodee (f x, tmap f tx, tmap f ty)
+
+-- ## es17: using tmap implement the function succTree taking a tree
+-- t and computing a tree whose elements are the successors of the values
+-- in t (use IntTree data) ##
+succTree :: IntTree -> IntTree
+succTree = tmap (+ 1)
+
+-- ## es18: Write a function sumSucc taking a tree t and computing the
+-- sum of the elements of succTree t (use IntTree data)
+sumSucc :: IntTree -> Int
+sumSucc = aux . succTree
+  where
+    aux (Leaf x) = x
+    aux (Nodee (x, tx, ty)) = x + aux tx + aux ty
+
+-- >>> succTree (Nodee (4, Leaf 7, Leaf 1))
+-- Nodee (5,Leaf 8,Leaf 2)
