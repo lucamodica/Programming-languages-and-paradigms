@@ -1,4 +1,4 @@
-# LPP
+# Programming languages and paradigms
 Exercises about the functional programming paradigm, using Haskell as a programming language, 
 to also understand this particular way of thinkng about a problem with code.
 
